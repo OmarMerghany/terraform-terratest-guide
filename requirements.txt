@@ -1,0 +1,5 @@
+google-auth==2.1.1
+google-auth-oauthlib==0.4.4
+google-auth-httplib2==0.4.2
+terraform==1.0.3
+terratest==1.0.3
