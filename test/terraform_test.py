@@ -22,8 +22,8 @@ def test_cloud_run_app():
     ]
 
     # Deploy the Cloud Run application using Terraform
-    subprocess.run(["terraform", "init", terraform_dir], check=True)
-    subprocess.run(["terraform", "apply", terraform_dir] + options, check=True)
+    subprocess.run(["terraform", "init", "-chdir", terraform_dir], check=True)
+    subprocess.run(["terraform", "apply", "-chdir", terraform_dir] + options, check=True)
 
     # Wait for the Cloud Run service to start up
     time.sleep(30)
@@ -39,7 +39,7 @@ def test_cloud_run_app():
     assert response_text == expected_response, f"Unexpected response: {response_text}"
 
     # Destroy the resources using Terraform
-    subprocess.run(["terraform", "destroy", "-auto-approve", terraform_dir] + options, check=True)
+    subprocess.run(["terraform", "destroy", "-auto-approve", "-chdir", terraform_dir] + options, check=True)
 
 
 if __name__ == "__main__":
