@@ -7,7 +7,7 @@ def test_cloud_run_app():
     # Set up the Terraform options with the path to the Terraform code and the values to use
     os.environ["GCP_PROJECT_ID"] = os.environ.get("GCP_PROJECT_ID")
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-    terraform_dir = os.path.join(os.getcwd(), "terraform")
+    terraform_dir = os.path.join(os.getcwd())
     test_name = "test-" + os.environ["GITHUB_RUN_NUMBER"]
     options = [
         "-auto-approve",
