@@ -38,4 +38,5 @@ jobs:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          python test/terraform_test.py
+          cp test/terraform_test.py terraform_test.py 
+          python terraform_test.py
