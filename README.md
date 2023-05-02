@@ -23,7 +23,7 @@ terraform-terrates-guide/
 ├── variables.tf
 ├── test/
 │   ├── __init__.py
-│   └── terraform_terratest_test.py
+│   └── terraform_test.py
 └── README.md
 ```
 `.github/workflows/ci.yml`: running CI pipeline on Github Actions
@@ -31,7 +31,7 @@ terraform-terrates-guide/
 `variables.tf`: Terraform configuration file for defining variables used in the Terraform configuration.
 `outputs.tf`: Terraform configuration file for defining outputs to display after Terraform applies the configuration.
 `test`: Directory containing the Terratest test file.
-`test/terraform_terratest_test.py`: Terratest test file for testing the Cloud Run service.
+`test/terraform_test.py`: Terratest test file for testing the Cloud Run service.
 `README.md`: Instructions and information for using this repository.
 
 ## Running the Tests
