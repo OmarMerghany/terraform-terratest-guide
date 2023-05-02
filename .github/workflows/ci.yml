@@ -27,6 +27,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.0.3"
+
+      - name: Install Terratest
+        run: |
+          go get github.com/gruntwork-io/terratest/modules/terraform
+          go get github.com/gruntwork-io/terratest/modules/http-helper
+          
       - name: Run tests
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
