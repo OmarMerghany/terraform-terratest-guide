@@ -33,6 +33,9 @@ def test_cloud_run_app():
     # Send an HTTP GET request to the Cloud Run service
     expected_response = "Hello World!"
     url = subprocess.run(["terraform", "output", "url"], capture_output=True, text=True).stdout.strip()
+    print('before url: ', url)
+    url = url.replace('[','').replace(']','') # remove brackets from URL
+    print('after url: ', url)
     response = requests.get(url)
     response_text = response.text.strip()
 
