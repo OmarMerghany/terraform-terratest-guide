@@ -35,6 +35,16 @@ def test_cloud_run_app():
     url = subprocess.run(["terraform", "output", "url"], capture_output=True, text=True).stdout.strip().replace('"', '')
 
     print(f'-----------------------{url} \n url:')
+    print('++++++++++++++++++++++++++++ hello:')
+    try:
+        import re
+        match = re.search(r"output url\n(.+)", url)
+        if match:
+            url = match.group(1)
+            print(f' let us try this approac {url}')
+    except:
+        print('ERROR Error error')
+
     response = requests.get(url)
     response_text = response.text.strip()
 
