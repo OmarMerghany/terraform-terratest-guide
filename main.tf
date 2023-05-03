@@ -22,3 +22,18 @@ resource "google_cloud_run_service" "service" {
     latest_revision = true
   }
 }
+
+resource "google_cloud_run_iam_policy" "service" {
+  location = var.region
+  project  = var.project_id
+  service  = google_cloud_run_service.service.name
+
+  policy_data = jsonencode({
+    bindings = [
+      {
+        members = ["allUsers"]
+        role    = "roles/run.invoker"
+      }
+    ]
+  })
+}
