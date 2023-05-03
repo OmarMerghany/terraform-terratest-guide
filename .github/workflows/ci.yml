@@ -44,5 +44,7 @@ jobs:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
+          export GOOGLE_APPLICATION_CREDENTIALS=key.json
+          export GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           cp test/terraform_test.py terraform_test.py 
           python terraform_test.py
