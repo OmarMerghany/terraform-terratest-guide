@@ -3,10 +3,12 @@ import subprocess
 import time
 import requests
 
+
 def test_cloud_run_app():
     # Set up the Terraform options with the path to the Terraform code and the values to use
     os.environ["GCP_PROJECT_ID"] = os.environ.get("GCP_PROJECT_ID")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get(
+        "GOOGLE_APPLICATION_CREDENTIALS")
     # terraform_dir = os.path.join(os.getcwd())
     test_name = "test-" + os.environ["GITHUB_RUN_NUMBER"]
     options = [
@@ -32,11 +34,8 @@ def test_cloud_run_app():
 
     # Send an HTTP GET request to the Cloud Run service
     expected_response = "Hello, world!"
-    url = subprocess.run(["terraform", "output", "url"], capture_output=True, text=True).stdout.strip().replace('"', '')
-
-    print(f'-----------------------{url} \n url:')
-    print('++++++++++++++++++++++++++++ hello:')
-
+    url = subprocess.run(["terraform", "output", "url"],
+                         capture_output=True, text=True).stdout.strip().replace('"', '')
     try:
         import re
         match = re.search(r"output url\n(.+)", url)
@@ -44,14 +43,13 @@ def test_cloud_run_app():
             url = match.group(1)
             print(f' let us try this approac {url}')
     except:
-        print('ERROR Error error')
+        print('ERROR in retrieving url')
 
     response = requests.get(url)
     response_text = response.text.strip()
-    time.sleep(30)
     # Check that the response matches the expected response
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
-    assert expected_response in response_text , f"Unexpected response: {response_text}"
+    assert expected_response in response_text, f"Unexpected response: {response_text}"
 
     # Destroy the resources using Terraform
     subprocess.run(["terraform", "destroy"] + options, check=True)

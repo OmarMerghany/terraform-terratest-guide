@@ -32,13 +32,11 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.0.3"
-      
 
       - name: Run tests
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
-          echo $GCP_PROJECT_ID
           cp test/terraform_test.py terraform_test.py 
           python terraform_test.py
