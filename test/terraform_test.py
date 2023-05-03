@@ -33,7 +33,8 @@ def test_cloud_run_app():
     # Send an HTTP GET request to the Cloud Run service
     expected_response = "Hello, world!"
     url = subprocess.run(["terraform", "output", "url"], capture_output=True, text=True).stdout.strip().replace('"', '')
-    print('----------------------- url: ', url)
+
+    print(f'-----------------------{url} \n url:')
     response = requests.get(url)
     response_text = response.text.strip()
 
