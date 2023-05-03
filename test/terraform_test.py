@@ -36,6 +36,7 @@ def test_cloud_run_app():
 
     print(f'-----------------------{url} \n url:')
     print('++++++++++++++++++++++++++++ hello:')
+
     try:
         import re
         match = re.search(r"output url\n(.+)", url)
@@ -47,7 +48,7 @@ def test_cloud_run_app():
 
     response = requests.get(url)
     response_text = response.text.strip()
-
+    time.sleep(30)
     # Check that the response matches the expected response
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
     assert expected_response in response_text , f"Unexpected response: {response_text}"
