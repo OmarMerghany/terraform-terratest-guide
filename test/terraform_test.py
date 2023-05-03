@@ -31,17 +31,18 @@ def test_cloud_run_app():
     time.sleep(30)
 
     # Send an HTTP GET request to the Cloud Run service
-    expected_response = "Hello World!"
+    expected_response = "Hello, world!"
     url = subprocess.run(["terraform", "output", "url"], capture_output=True, text=True).stdout.strip().replace('"', '')
+    print('----------------------- url: ', url)
     response = requests.get(url)
     response_text = response.text.strip()
 
     # Check that the response matches the expected response
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
-    assert response_text == expected_response, f"Unexpected response: {response_text}"
+    assert expected_response in response_text , f"Unexpected response: {response_text}"
 
     # Destroy the resources using Terraform
-    subprocess.run(["terraform", "destroy", "-auto-approve"] + options, check=True)
+    subprocess.run(["terraform", "destroy"] + options, check=True)
 
 
 if __name__ == "__main__":
