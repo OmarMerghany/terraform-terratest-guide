@@ -33,13 +33,12 @@ jobs:
           terraform_version: "1.0.3"
       
       - name: Set up GCP credentials
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" >> key.json
-          ls -ltr
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=key.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS"
           cat key.json
-          echo "WWWWWWWWWWWWWWWWWWW-------------------------------------"
+          cat variables.tf
 
       - name: Run tests
         env:
