@@ -17,3 +17,9 @@ variable "image" {
   type        = string
   description = "The container image to use for the Cloud Run service."
 }
+
+variable "cred" {
+  type        = string
+  description = "credentals for SA."
+}
+

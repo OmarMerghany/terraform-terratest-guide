@@ -19,6 +19,8 @@ def test_cloud_run_app():
         f"service_name={test_name}",
         "-var",
         "image=gcr.io/google-samples/hello-app:1.0",
+        "-var",
+        f"cred={os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')}",
     ]
 
     # Deploy the Cloud Run application using Terraform
