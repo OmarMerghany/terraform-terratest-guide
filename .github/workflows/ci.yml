@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.test.GOOGLE_APPLICATION_CREDENTIALS }}
   GITHUB_RUN_NUMBER: ${{ github.run_number }}
-  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_PROJECT_ID: ${{ secrets.test.GCP_PROJECT_ID }}
 
 jobs:
   test:
@@ -34,20 +34,20 @@ jobs:
       
       - name: Set up GCP credentials
         run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > key.json
+          echo "${{ secrets.test.GOOGLE_APPLICATION_CREDENTIALS }}" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           echo "$GOOGLE_APPLICATION_CREDENTIALS"
-          cat key.json
+          ls -la
           cat variables.tf
 
       - name: Run tests
         env:
           GOOGLE_APPLICATION_CREDENTIALS: key.json
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_PROJECT_ID: ${{ secrets.test.GCP_PROJECT_ID }}
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
-          export GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+          export GCP_PROJECT_ID=${{ secrets.test.GCP_PROJECT_ID }}
           cat $GCP_PROJECT_ID
           cp test/terraform_test.py terraform_test.py 
           python terraform_test.py
