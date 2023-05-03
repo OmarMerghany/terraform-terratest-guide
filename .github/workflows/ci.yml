@@ -40,8 +40,8 @@ jobs:
           echo "$GOOGLE_APPLICATION_CREDENTIALS"
           cat key.json
           ls -ltr
-          echo "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}" 
-          echo "${{ env.GCP_PROJECT_ID }}"
+          echo "${{ secrets.GCP_PROJECT_ID }}"
+          export GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           cat variables.tf
 
       - name: Run tests
