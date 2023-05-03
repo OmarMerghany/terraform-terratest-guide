@@ -31,10 +31,16 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.0.3"
+      
+      - name: Set up GCP credentials
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS > key.json
 
       - name: Run tests
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: key.json
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
