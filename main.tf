@@ -21,7 +21,7 @@ resource "google_cloud_run_service" "service" {
   }
 }
 
-resource "google_cloud_run_iam_policy" "service" {
+resource "google_cloud_run_service_iam_policy" "service" {
   location = var.region
   project  = var.project_id
   service  = google_cloud_run_service.service.name
