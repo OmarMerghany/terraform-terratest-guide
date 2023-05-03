@@ -35,11 +35,13 @@ jobs:
       
       - name: Set up GCP credentials
         run: |
-          echo "${{ secrets.test.GOOGLE_APPLICATION_CREDENTIALS }}" > key.json
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           echo "$GOOGLE_APPLICATION_CREDENTIALS"
           cat key.json
           ls -ltr
+          echo "${{ env.GOOGLE_APPLICATION_CREDENTIALS }}" 
+          echo "${{ env.GCP_PROJECT_ID }}"
           cat variables.tf
 
       - name: Run tests
