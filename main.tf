@@ -7,6 +7,8 @@ provider "google" {
 resource "google_cloud_run_service" "service" {
   name               = var.service_name
   location           = var.region
+  allow_unauthenticated = true
+
   template {
     spec {
       containers {

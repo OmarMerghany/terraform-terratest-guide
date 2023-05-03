@@ -33,17 +33,10 @@ jobs:
         with:
           terraform_version: "1.0.3"
       
-      - name: Set up GCP credentials
-        run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
-          cat key.json
-          echo "$GCP_PROJECT_ID" > g.txt
-          ls -ltr
-          cat g.txt
-          cat variables.tf
 
       - name: Run tests
         run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
           echo $GCP_PROJECT_ID
