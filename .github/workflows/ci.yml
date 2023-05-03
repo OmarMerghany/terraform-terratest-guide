@@ -36,7 +36,7 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
-          echo $GOOGLE_APPLICATION_CREDENTIALS > key.json
+          echo ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} > key.json
 
       - name: Run tests
         env:
