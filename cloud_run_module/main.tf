@@ -1,5 +1,5 @@
 provider "google" {
-  project = var.project_id
+  project = var.GCP_PROJECT_ID
   region  = var.region
 }
 
@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "service" {
 
 resource "google_cloud_run_service_iam_policy" "service" {
   location = var.region
-  project  = var.project_id
+  project  = var.GCP_PROJECT_ID
   service  = google_cloud_run_service.service.name
 
   policy_data = jsonencode({
