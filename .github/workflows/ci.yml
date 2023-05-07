@@ -62,7 +62,7 @@ jobs:
           echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
-          cd test && -test.v -test.timeout 30m
+          cd test && go test -v -timeout 30m
 
       # - name: Run tests
       #   run: |
