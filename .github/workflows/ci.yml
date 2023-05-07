@@ -53,15 +53,9 @@ jobs:
         # run: cd examples && terraform plan -out=tfplan
 
       - name: Run Terratest
-        env:
-          SERVICE_NAME: "example-service"
-          GCP_PROJECT_ID: $GCP_PROJECT_ID
-          REGION: $REGION
-          CRED: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
-          cat key.json
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
           export TF_VAR_GCP_PROJECT_ID=$GCP_PROJECT_ID
           export TF_VAR_REGION=$REGION
