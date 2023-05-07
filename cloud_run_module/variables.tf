@@ -1,4 +1,4 @@
-variable "project_id" {
+variable "GCP_PROJECT_ID" {
   type        = string
   description = "The ID of the GCP project to deploy resources into."
 }
@@ -16,10 +16,5 @@ variable "service_name" {
 variable "image" {
   type        = string
   description = "The container image to use for the Cloud Run service."
-}
-
-variable "cred" {
-  type        = string
-  description = "credentals for SA."
 }
 
