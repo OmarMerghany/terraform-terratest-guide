@@ -1,5 +1,5 @@
 module "cloud_run_service" {
-  source = "./cloud_run_module"
+  source = "../cloud_run_module"
 
   project_id   = var.GCP_PROJECT_ID
   region       = var.REGION
