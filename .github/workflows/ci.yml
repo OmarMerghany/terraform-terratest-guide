@@ -37,7 +37,10 @@ jobs:
           go-version: '1.17'
 
       - name: Build Terratest
-        run: go build ./test
+        run: |
+          go mod init github.com/OmarMerghany/terraform-terratest-guide
+          go mod tidy
+          go build ./test
 
       - name: Terraform Init
         run: terraform init
