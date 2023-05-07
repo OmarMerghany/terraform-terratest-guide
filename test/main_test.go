@@ -4,15 +4,24 @@ import (
 	"testing"
 	"time"
 	"fmt"
+	"os"
 	"github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestCloudRunServiceExample(t *testing.T) {
 	t.Parallel()
+	gcpProjectID := os.Getenv("GCP_PROJECT_ID")
+	creds := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
+	region := os.Getenv("REGION")
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../examples",
+		Vars: map[string]interface{}{
+			"GCP_PROJECT_ID": gcpProjectID,
+			"GOOGLE_APPLICATION_CREDENTIALS": creds,
+			"REGION": region,
+		},
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
