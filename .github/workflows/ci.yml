@@ -38,7 +38,7 @@ jobs:
           go mod init github.com/OmarMerghany/terraform-terratest-guide
           go mod tidy
 
-      - name: Terraform Init
+      - name: Validate Terraform infrastructure
         run: cd examples && terraform init  && terraform validate
 
       - name: Run Terratest

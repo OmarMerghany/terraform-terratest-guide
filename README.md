@@ -1,14 +1,17 @@
 # Terraform Cloud Run Application Test
 
-This repository contains code and instructions for testing a Cloud Run application deployed using Terraform. The tests are written using Terratest, a Python-based library for automated infrastructure testing.
+This repository contains code and instructions for testing a Cloud Run application deployed using Terraform. The tests are written using Terratest, a Go-based library for automated infrastructure testing. 
 
-## Getting Started
+Terratest provides a high-level API for testing infrastructure, making it easier to write automated tests for Terraform code. The Cloud Run infrastructure is deployed using Terraform, a tool for building, changing, and versioning infrastructure.
 
-To get started with testing the Cloud Run application, you will need the following:
+## Prerequisites
+Before proceeding, ensure that you have the following installed on your system:
 
-- A Google Cloud Platform (GCP) project with billing enabled
-- The Google Cloud SDK installed on your machine
-- A service account key for the GCP project with the `Cloud Run Admin`, `IAM Service Account Actor`, and `Service Account User` roles assigned
+* Terraform v1.0.4
+* Go v1.18.1 
+* GCP account with billing enabled
+* Google Cloud SDK installed
+* A service account key for the GCP project with the `Cloud Run Admin`, `IAM Service Account Actor`, and `Service Account User` roles assigned
 
 
 ## Repository Structure
@@ -18,23 +21,42 @@ terraform-terrates-guide/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
-├── main.tf
-├── outputs.tf
-├── variables.tf
+├── cloud_run_module/
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
+├── examples/
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
 ├── test/
-│   ├── __init__.py
-│   └── terraform_test.py
+│   ├── main_test.go
+│   └── terratest.hcl
 └── README.md
 ```
-`.github/workflows/ci.yml`: running CI pipeline on Github Actions
-`main.tf`: Terraform configuration file for creating a Cloud Run service.
-`variables.tf`: Terraform configuration file for defining variables used in the Terraform configuration.
-`outputs.tf`: Terraform configuration file for defining outputs to display after Terraform applies the configuration.
-`test`: Directory containing the Terratest test file.
-`test/terraform_test.py`: Terratest test file for testing the Cloud Run service.
+
+`.github/workflows/ci.yml`: This file defines the CI workflow on Github Actions that runs the Terratest scripts whenever a pull request is opened or pushed to the main branch. 
+
+`cloud_run_module/main.tf`: This file defines the Cloud Run module.
+
+`cloud_run_module/outputs.tf`: This file defines the output variables for the Cloud Run module.
+
+`cloud_run_module/variables.tf`: This file defines the input variables for the Cloud Run module.
+
+`examples/main.tf`: This file defines the input variables for the Cloud Run service.
+
+`examples/outputs.tf`: This file defines the output variables for the Cloud Run service.
+
+`examples/variables.tf`: This file defines the input variables for the Cloud Run service.
+
+`test/main_test.go`: This file defines the test cases that are run by Terratest.
+
+`test/terratest.hcl`: This file defines the Terraform module that is used by Terratest.
+
 `README.md`: Instructions and information for using this repository.
 
-## Running the Tests
+
+## Getting Started
 
 To run the tests, follow these steps:
 
@@ -43,29 +65,15 @@ To run the tests, follow these steps:
    ```sh
    git clone https://github.com/OmarMerghany/terraform-terratest-guide.git
 
-2. Create a virtual environment and activate it:
-
-    ```sh
-    python -m venv venv
-    source venv/bin/activate
-
-3. Install the dependencies:
-
-    ```sh
-    pip install -r requirements.txt
-
-4. Set the environment variables required for the tests:
+2. Set the environment variables required for the tests:
 
     ```sh
     export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service/account/key.json
-    export GCP_PROJECT_ID=<your-gcp-project-id>
+    export GCP_PROJECT_ID=<your-gcp-project-id>.
+    export REGION=<YOUR_REGION>
+    export service_name=<YOUR_service_name>
+    export image=<YOUR_IMAGE_NAME> #"gcr.io/google-samples/hello-app:1.0"
 
-5. Run the tests:
-   
-    ```sh
-    python test/terraform_test.py
+3. Navigate to the test directory and run `go mod init test` followed by `go mod tidy`
 
-6. Destroy the Terraform resources:
-
-    ```sh
-    terraform destroy
+4. Navigate to the test directory and run `go test -v`
