@@ -39,3 +39,7 @@ variable "timeout" {
   default = 30
 }
 
+variable "cred" {
+  type        = string
+  description = "credentals for SA."
+}

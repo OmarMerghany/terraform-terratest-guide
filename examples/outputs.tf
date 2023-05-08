@@ -1,5 +1,5 @@
 output "service_url" {
-  value = module.cloud_run_service.url
+  value = module.cloud_run_service.service_url
 }
 
 output "service_name" {

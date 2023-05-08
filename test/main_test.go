@@ -12,12 +12,14 @@ import (
 func TestCloudRunServiceExample(t *testing.T) {
 	t.Parallel()
 	gcpProjectID := os.Getenv("GCP_PROJECT_ID")
+	creds := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
 	region := os.Getenv("REGION")
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../examples",
 		Vars: map[string]interface{}{
 			"GCP_PROJECT_ID": gcpProjectID,
+			"cred": creds,
 			"REGION": region,
 		},
 	}
