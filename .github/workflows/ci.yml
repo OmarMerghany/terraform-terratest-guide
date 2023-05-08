@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - cloudrun-module
 
 env:
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
