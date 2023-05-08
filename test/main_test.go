@@ -29,10 +29,8 @@ func TestCloudRunServiceExample(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	output := terraform.Output(t, terraformOptions, "service_url")
-	re := regexp.MustCompile(`https://\S+`)
-    matches := re.FindStringSubmatch(output)
-    serviceURL := matches[0]
+	serviceURL := terraform.Output(t, terraformOptions, "service_url")
+	
     fmt.Println("/////////////////////////////////////////////////////////////////////\n\n\n",serviceURL)
     
 	time.Sleep(10 * time.Second)
