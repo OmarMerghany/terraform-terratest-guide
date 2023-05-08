@@ -55,7 +55,7 @@ jobs:
       - name: Run Terratest
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=key.json
+          export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/key.json"
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
           export REGION=$REGION
           cd test && go test -v -timeout 30m
