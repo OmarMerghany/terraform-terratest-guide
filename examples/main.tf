@@ -5,5 +5,4 @@ module "cloud_run_service" {
   region       = var.REGION
   service_name = var.service_name
   image        = var.image
-  cred = var.cred
 }

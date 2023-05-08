@@ -38,8 +38,3 @@ variable "timeout" {
   description = "The maximum amount of time that a request to the Cloud Run service can take."
   default = 30
 }
-
-variable "cred" {
-  type        = string
-  description = "credentals for SA."
-}

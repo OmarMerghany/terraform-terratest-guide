@@ -38,15 +38,8 @@ jobs:
           go mod init github.com/OmarMerghany/terraform-terratest-guide
           go mod tidy
 
-      # - name: Terraform Init
-      #   run: cd examples && terraform init
-
-      # - name: Terraform Validate
-      #   run: cd examples && terraform validate
-
-      # - name: Terraform Plan
-      #   id: plan
-        # run: cd examples && terraform plan -out=tfplan
+      - name: Terraform Init
+        run: cd examples && terraform init  && terraform validate
 
       - name: Run Terratest
         run: |
@@ -55,11 +48,3 @@ jobs:
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
           export REGION=$REGION
           cd test && go test -v -timeout 30m
-
-      # - name: Run tests
-      #   run: |
-      #     echo "$GOOGLE_APPLICATION_CREDENTIALS" > key.json
-      #     export GOOGLE_APPLICATION_CREDENTIALS=key.json
-      #     export GCP_PROJECT_ID=$GCP_PROJECT_ID
-      #     cp test/terraform_test.py terraform_test.py 
-      #     python terraform_test.py
