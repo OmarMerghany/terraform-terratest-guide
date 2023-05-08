@@ -47,4 +47,7 @@ jobs:
           export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/key.json"
           export GCP_PROJECT_ID=$GCP_PROJECT_ID
           export REGION=$REGION
+          export service_name="test-tf-$GITHUB_RUN_NUMBER"
+          export image="gcr.io/google-samples/hello-app:1.0"
           cd test && go test -v -timeout 30m
+

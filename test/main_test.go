@@ -12,12 +12,16 @@ func TestCloudRunServiceExample(t *testing.T) {
 	t.Parallel()
 	gcpProjectID := os.Getenv("GCP_PROJECT_ID")
 	region := os.Getenv("REGION")
+	service_name := os.Getenv("service_name")
+	image := os.Getenv("image")
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../examples",
 		Vars: map[string]interface{}{
 			"GCP_PROJECT_ID": gcpProjectID,
 			"REGION": region,
+			"service_name": service_name,
+			"image": image,
 		},
 	}
 	defer terraform.Destroy(t, terraformOptions)
