@@ -4,6 +4,7 @@ import (
 	"testing"
 	"time"
 	"fmt"
+	"regexp"
 	"os"
 	"github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -28,7 +29,15 @@ func TestCloudRunServiceExample(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	serviceURL := terraform.Output(t, terraformOptions, "service_url")
+	output := terraform.Output(t, terraformOptions, "service_url")
+	re := regexp.MustCompile(`https://\S+`)
+    matches := re.FindStringSubmatch(output)
+    if len(matches) == 1 {
+        serviceURL := matches[0]
+        fmt.Println(serviceURL)
+    } else {
+        fmt.Println("serviceURL not found")
+    }
 	time.Sleep(10 * time.Second)
 
 	expectedResponseBody := "Hello, world!\nVersion: 1.0.0\nHostname: localhost"
