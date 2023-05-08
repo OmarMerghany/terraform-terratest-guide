@@ -4,6 +4,11 @@ This repository contains code and instructions for testing a Cloud Run applicati
 
 Terratest provides a high-level API for testing infrastructure, making it easier to write automated tests for Terraform code. The Cloud Run infrastructure is deployed using Terraform, a tool for building, changing, and versioning infrastructure.
 
+
+![Integrating Infrastructure Testing in CI pipeline.](architecture.png)
+
+[Diagram inspired from](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevopscounsel.com%2Fwriting-automated-tests-for-terraform-code-using-terratest%2F&psig=AOvVaw189TVLGOvJO6voRWchZbQ_&ust=1683637805028000&source=images&cd=vfe&ved=0CBMQjhxqFwoTCPCGzNzl5f4CFQAAAAAdAAAAABAK)
+
 ## Prerequisites
 Before proceeding, ensure that you have the following installed on your system:
 
