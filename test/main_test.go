@@ -37,6 +37,7 @@ func TestCloudRunServiceExample(t *testing.T) {
         fmt.Println(serviceURL)
     } else {
         fmt.Println("serviceURL not found")
+		serviceURL = ""
     }
 	time.Sleep(10 * time.Second)
 
