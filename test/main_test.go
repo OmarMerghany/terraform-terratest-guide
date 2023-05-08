@@ -3,7 +3,6 @@ package test
 import (
 	"testing"
 	"time"
-	"fmt"
 	"os"
 	"github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -11,13 +10,11 @@ import (
 
 func TestCloudRunServiceExample(t *testing.T) {
 	t.Parallel()
-	gcpProjectID := os.Getenv("GCP_PROJECT_ID")
 	region := os.Getenv("REGION")
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../examples",
 		Vars: map[string]interface{}{
-			"GCP_PROJECT_ID": gcpProjectID,
 			"REGION": region,
 		},
 	}
